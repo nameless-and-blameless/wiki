@@ -1,21 +1,20 @@
-name: Move Directories to Data
+name: Update Wiki
 
-on: 
+on:
+  push:
+    paths:
+      - wiki/**  
   workflow_dispatch:
-
+  
 jobs:
-  move_directories:
+  update-wiki:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v4
 
-    - name: Update wiki
-  # You may pin to the exact commit or the version.
-  # uses: orlovm/Wiki-Action@0a00b3232faed936e9381d2a176bc551afd3576d
-  uses: orlovm/Wiki-Action@v1
-  with:
-    # Location of wiki directory
-    path: wiki # default is wiki
-    # Github token
-    token: 
-          
+      - name: Update Wiki
+        uses: OrlovM/Wiki-Action@master
+        with:
+          path: wiki
+          token: ${{ secrets.GITHUB_TOKEN }}
